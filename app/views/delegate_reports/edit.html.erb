@@ -4,7 +4,7 @@
 <% add_to_packs("markdown_editor") %>
 
 <%= render layout: 'nav' do %>
-  <h2>Editing Delegate Report for <%= @competition.name %></h2>
+  <h2>Editing Delegate Report for <%= @competition.name%></h2>
   <%= simple_form_for @delegate_report, url: delegate_report_path(@competition.id),
                                         html: { class: "delegate-report" } do |f| %>
     <%= f.hidden_field :updated_at %>

@@ -74,16 +74,6 @@ FactoryBot.define do
       metadata { FactoryBot.create(:treasurer_role_metadata) }
     end
 
-    trait :councils_leader do
-      group { UserGroup.council_group_wac }
-      metadata { FactoryBot.create(:wac_role_metadata, status: RolesMetadataCouncils.statuses[:leader]) }
-    end
-
-    trait :councils_member do
-      group { UserGroup.council_group_wac }
-      metadata { FactoryBot.create(:wac_role_metadata, status: RolesMetadataCouncils.statuses[:member]) }
-    end
-
     trait :wst_admin_member do
       group { UserGroup.teams_committees_group_wst_admin }
       metadata { FactoryBot.create(:wst_admin_metadata, status: RolesMetadataTeamsCommittees.statuses[:member]) }

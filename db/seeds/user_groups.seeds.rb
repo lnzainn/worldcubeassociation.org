@@ -125,15 +125,6 @@ after :groups_metadata_board, :groups_metadata_councils, :groups_metadata_teams_
     is_hidden: false,
   )
 
-  # Councils
-  UserGroup.create!(
-    name: 'WCA Advisory Council',
-    group_type: :councils,
-    is_active: true,
-    is_hidden: false,
-    metadata: GroupsMetadataCouncils.find_by!(friendly_id: 'wac'),
-  )
-
   # Teams/Committees
   UserGroup.create!(
     name: 'WCA Communications Team',

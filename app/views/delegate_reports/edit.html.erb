@@ -41,3 +41,24 @@
     <% end %>
   <% end %>
 <% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Function to handle the beforeunload event
+    function handleBeforeUnload(event) {
+      event.preventDefault();
+      event.returnValue = 'Are you sure you want to leave this page? You may have unsaved changes.';
+    }
+
+    // Add the event listener to prompt the user before leaving the page
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Remove the event listener when the form is submitted to avoid the prompt
+    const form = document.querySelector('form.delegate-report');
+    if (form) {
+      form.addEventListener('submit', function() {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+      });
+    }
+  });
+</script>

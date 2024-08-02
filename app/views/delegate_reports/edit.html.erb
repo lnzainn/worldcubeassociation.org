@@ -4,7 +4,7 @@
 <% add_to_packs("markdown_editor") %>
 
 <%= render layout: 'nav' do %>
-  <h2>Editing Delegate Report for <%= @competition.name%></h2>
+  <h2>Editing Delegate Report for <%= @competition.name %></h2>
   <%= simple_form_for @delegate_report, url: delegate_report_path(@competition.id),
                                         html: { class: "delegate-report" } do |f| %>
     <%= f.hidden_field :updated_at %>
@@ -47,6 +47,7 @@
     // Function to handle the beforeunload event
     function handleBeforeUnload(event) {
       event.preventDefault();
+      // Modern browsers use a generic message and ignore the custom message.
       event.returnValue = 'Are you sure you want to leave this page? You may have unsaved changes.';
     }
 

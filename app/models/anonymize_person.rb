@@ -70,7 +70,7 @@ class AnonymizePerson
                                      unconfirmed_wca_id: nil,
                                      delegate_id_to_handle_wca_id_claim: nil,
                                      dob: nil,
-                                     gender: "o",
+                                     gender: nil,
                                      current_sign_in_ip: nil,
                                      last_sign_in_ip: nil)
       end
@@ -92,14 +92,14 @@ class AnonymizePerson
           else
             current_sub_id += 1
             current_country_id = p.countryId
-            p.update(wca_id: new_wca_id, name: ANONYMIZED_NAME, gender: "o", dob: nil, subId: current_sub_id)
+            p.update(wca_id: new_wca_id, name: ANONYMIZED_NAME, gender: nil, dob: nil, subId: current_sub_id)
           end
         end
 
       end
 
       # Anonymize person's data in Persons for subid 1
-      person.update(wca_id: new_wca_id, name: ANONYMIZED_NAME, gender: "o", dob: nil)
+      person.update(wca_id: new_wca_id, name: ANONYMIZED_NAME, gender: nil, dob: nil)
     end
 
     { new_wca_id: new_wca_id }

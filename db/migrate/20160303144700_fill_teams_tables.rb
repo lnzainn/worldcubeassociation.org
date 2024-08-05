@@ -11,7 +11,7 @@ class FillTeamsTables < ActiveRecord::Migration
     SQL
 
     execute <<-SQL
-      INSERT INTO teams (friendly_id, name, description, created_at, updated_at) values ('wdc','Disciplinary Committee','This committee advises the WCA Board in special cases, like alleged violations of WCA Regulations, and may be contacted by WCA members in case of important personal matters regarding WCA competitions.', NOW(), NOW())
+      INSERT INTO teams (friendly_id, name, description, created_at, updated_at) values ('wic','Integrity Committee','This committee advises the WCA Board in special cases, like alleged violations of WCA Regulations, and may be contacted by WCA members in case of important personal matters regarding WCA competitions.', NOW(), NOW())
     SQL
 
     execute <<-SQL
@@ -27,7 +27,7 @@ class FillTeamsTables < ActiveRecord::Migration
     SQL
 
     execute <<-SQL
-      INSERT INTO team_members (team_id, user_id, start_date, created_at, updated_at) SELECT teams.id, users.id, NOW(), NOW(), NOW() FROM teams,users WHERE teams.friendly_id = 'wdc' and users.wdc_team = 1
+      INSERT INTO team_members (team_id, user_id, start_date, created_at, updated_at) SELECT teams.id, users.id, NOW(), NOW(), NOW() FROM teams,users WHERE teams.friendly_id = 'wic' and users.wic_team = 1
     SQL
 
     execute <<-SQL
@@ -37,7 +37,7 @@ class FillTeamsTables < ActiveRecord::Migration
     # This will work because each team leader is a member of just one team.
     # We would have to split this query otherwise.
     execute <<-SQL
-      UPDATE team_members SET team_leader = 1 where user_id in (SELECT id from users where (wrc_team_leader = 1 OR wdc_team_leader = 1 OR results_team_leader = 1 or software_team_leader = 1))
+      UPDATE team_members SET team_leader = 1 where user_id in (SELECT id from users where (wrc_team_leader = 1 OR wic_team_leader = 1 OR results_team_leader = 1 or software_team_leader = 1))
     SQL
   end
 end

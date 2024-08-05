@@ -92,9 +92,9 @@ class UserGroup < ApplicationRecord
     GroupsMetadataTeamsCommittees.find_by(friendly_id: 'wcat').user_group
   end
 
-  def self.teams_committees_group_wdc
-    GroupsMetadataTeamsCommittees.find_by(friendly_id: 'wdc').user_group
-  end
+  # def self.teams_committees_group_wdc
+  #   GroupsMetadataTeamsCommittees.find_by(friendly_id: 'wdc').user_group
+  # end
 
   def self.teams_committees_group_wic
     GroupsMetadataTeamsCommittees.find_by(friendly_id: 'wic').user_group

@@ -68,8 +68,14 @@ module PanelHelper
           panel_pages[:subordinateUpcomingCompetitions],
         ],
       },
-      wdc: {
-        name: 'WDC panel',
+      # wdc: {
+      #   name: 'WDC panel',
+      #   pages: [
+      #     panel_pages[:bannedCompetitors],
+      #   ],
+      # },
+      wic: {
+        name: 'WIC panel',
         pages: [
           panel_pages[:bannedCompetitors],
         ],

@@ -89,9 +89,7 @@ module PanelHelper
       },
       wct: {
         name: 'WCT panel',
-        pages: [
-          panel_pages[],
-        ],
+        pages: [],
       },
     }
   end

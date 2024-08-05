@@ -3,7 +3,7 @@
 class UpdateCommittesEmails < ActiveRecord::Migration[5.1]
   def change
     execute <<-SQL
-      UPDATE teams set email = 'disciplinary@worldcubeassociation.org' where friendly_id = 'wdc';
+      UPDATE teams set email = 'integrity@worldcubeassociation.org' where friendly_id = 'wic';
     SQL
 
     execute <<-SQL

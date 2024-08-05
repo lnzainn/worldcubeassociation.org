@@ -14,6 +14,7 @@ import useQueryParams from '../../../../lib/hooks/useQueryParams';
 import useLoadedData from '../../../../lib/hooks/useLoadedData';
 import Errored from '../../../Requests/Errored';
 import UtcDatePicker from '../../../wca/UtcDatePicker';
+import moment from 'moment';
 
 const genderOptions = _.map(genders.byId, (gender) => ({
   key: gender.id,
@@ -61,6 +62,14 @@ function EditPersonForm({ wcaId, clearWcaId, setResponse }) {
 
   const handleFormChange = (e, { name: formName, value }) => {
     setEditedUserDetails((prev) => ({ ...prev, [formName]: value }));
+  };
+
+  const handleDateChange = (date) => {
+    // Validate the date format if manually entered
+    const isValidDate = moment(date, 'YYYY-MM-DD', true).isValid();
+    if (isValidDate) {
+      setEditedUserDetails((prev) => ({ ...prev, dob: date }));
+    }
   };
 
   const editPerson = (method) => {
@@ -144,14 +153,11 @@ function EditPersonForm({ wcaId, clearWcaId, setResponse }) {
           name="dob"
           control={UtcDatePicker}
           showYearDropdown
-          dateFormatOverride="YYYY-MM-dd"
+          dateFormatOverride="YYYY-MM-DD"
           dropdownMode="select"
           disabled={!editedUserDetails}
           isoDate={editedUserDetails?.dob}
-          onChange={(date) => handleFormChange(null, {
-            name: 'dob',
-            value: date,
-          })}
+          onChange={handleDateChange}
         />
         <Button
           disabled={_.isEqual(editedUserDetails, originalUserDetails) || !editedUserDetails}

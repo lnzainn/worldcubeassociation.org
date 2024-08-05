@@ -231,7 +231,8 @@ Rails.application.routes.draw do
   get 'organizations' => 'regional_organizations#index'
   get 'admin/regional-organizations' => 'regional_organizations#admin'
 
-  get 'disciplinary' => 'wdc#root'
+  # get 'disciplinary' => 'wdc#root'
+  get 'integrity' => 'wic#root'
 
   get 'contact' => 'contacts#index'
   post 'contact' => 'contacts#contact'

@@ -67,6 +67,7 @@ class PanelController < ApplicationController
       leaderForms: "leader-forms",
       groupsManager: "groups-manager",
       importantLinks: "important-links",
+      wctLinks: "wct-important-links",
       delegateHandbook: "delegate-handbook",
       seniorDelegatesList: "senior-delegates-list",
       leadersAdmin: "leaders-admin",

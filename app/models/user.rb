@@ -477,8 +477,12 @@ class User < ApplicationRecord
     group_member?(UserGroup.teams_committees_group_wcat)
   end
 
-  def wdc_team?
-    group_member?(UserGroup.teams_committees_group_wdc)
+  # def wdc_team?
+  #   group_member?(UserGroup.teams_committees_group_wdc)
+  # end
+
+  def wic_team?
+    group_member?(UserGroup.teams_committees_group_wic)
   end
 
   def ethics_committee?
@@ -598,8 +602,14 @@ class User < ApplicationRecord
     can_view_past_banned_competitors? || staff_delegate?
   end
 
+  # private def can_view_past_banned_competitors?
+  #   wdc_team? || ethics_committee? || board_member? || weat_team? || results_team? || admin?
+  # end
+
+  # Make sure to add WAC here to view past banned competitors
+
   private def can_view_past_banned_competitors?
-    wdc_team? || ethics_committee? || board_member? || weat_team? || results_team? || admin?
+    wic_team? || board_member? || weat_team? || results_team? || admin?
   end
 
   private def groups_with_read_access_for_current
@@ -706,8 +716,12 @@ class User < ApplicationRecord
     permission.present? && (permission[:scope] == "*" || permission[:scope].include?(scope))
   end
 
+  # def can_view_all_users?
+  #   admin? || board_member? || results_team? || communication_team? || wdc_team? || any_kind_of_delegate? || weat_team? || wrc_team?
+  # end
+
   def can_view_all_users?
-    admin? || board_member? || results_team? || communication_team? || wdc_team? || any_kind_of_delegate? || weat_team? || wrc_team?
+    admin? || board_member? || results_team? || communication_team? || wic_team? || any_kind_of_delegate? || weat_team? || wrc_team?
   end
 
   def can_edit_user?(user)
@@ -731,8 +745,12 @@ class User < ApplicationRecord
     admin? || financial_committee?
   end
 
+  # def can_edit_banned_competitors?
+  #   can_edit_any_groups? || group_leader?(UserGroup.teams_committees_group_wdc) || group_leader?(UserGroup.teams_committees_group_wec)
+  # end
+
   def can_edit_banned_competitors?
-    can_edit_any_groups? || group_leader?(UserGroup.teams_committees_group_wdc) || group_leader?(UserGroup.teams_committees_group_wec)
+    can_edit_any_groups? || group_leader?(UserGroup.teams_committees_group_wic) 
   end
 
   def can_manage_regional_organizations?
@@ -743,8 +761,12 @@ class User < ApplicationRecord
     can_admin_results? || any_kind_of_delegate?
   end
 
+  # def can_create_posts?
+  #   wdc_team? || wrc_team? || communication_team? || can_announce_competitions?
+  # end
+
   def can_create_posts?
-    wdc_team? || wrc_team? || communication_team? || can_announce_competitions?
+    wic_team? || wrc_team? || communication_team? || can_announce_competitions?
   end
 
   def can_upload_images?
@@ -827,8 +849,12 @@ class User < ApplicationRecord
     competition.announced? && appropriate_role && appropriate_time && !competition.results_posted?
   end
 
+  # def can_create_poll?
+  #   admin? || board_member? || wrc_team? || wdc_team? || quality_assurance_committee?
+  # end
+
   def can_create_poll?
-    admin? || board_member? || wrc_team? || wdc_team? || quality_assurance_committee?
+    admin? || board_member? || wrc_team? || wic_team? || quality_assurance_committee?
   end
 
   def can_vote_in_poll?
@@ -839,8 +865,12 @@ class User < ApplicationRecord
     can_create_poll? || can_vote_in_poll?
   end
 
+  # def can_view_delegate_matters?
+  #   any_kind_of_delegate? || can_admin_results? || wrc_team? || wdc_team? || quality_assurance_committee? || competition_announcement_team? || weat_team? || communication_team? || ethics_committee? || financial_committee?
+  # end
+
   def can_view_delegate_matters?
-    any_kind_of_delegate? || can_admin_results? || wrc_team? || wdc_team? || quality_assurance_committee? || competition_announcement_team? || weat_team? || communication_team? || ethics_committee? || financial_committee?
+    any_kind_of_delegate? || can_admin_results? || wrc_team? || wic_team? || quality_assurance_committee? || competition_announcement_team? || weat_team? || communication_team? || financial_committee?
   end
 
   def can_manage_incidents?
@@ -1338,6 +1368,37 @@ class User < ApplicationRecord
     admin? || board_member? || senior_delegate?
   end
 
+  # def can_access_panel?(panel_id)
+  #   case panel_id
+  #   when :admin
+  #     admin? || senior_results_team?
+  #   when :staff
+  #     staff?
+  #   when :delegate
+  #     any_kind_of_delegate?
+  #   when :wfc
+  #     can_admin_finances?
+  #   when :wrt
+  #     can_admin_results?
+  #   when :wst
+  #     software_team?
+  #   when :board
+  #     board_member?
+  #   when :leader
+  #     active_roles.any? { |role| role.is_lead? && (role.group.teams_committees? || role.group.councils?) }
+  #   when :senior_delegate
+  #     senior_delegate?
+  #   when :wdc
+  #     wdc_team?
+  #   when :wec
+  #     ethics_committee?
+  #   when :weat
+  #     weat_team?
+  #   else
+  #     false
+  #   end
+  # end
+
   def can_access_panel?(panel_id)
     case panel_id
     when :admin
@@ -1358,10 +1419,8 @@ class User < ApplicationRecord
       active_roles.any? { |role| role.is_lead? && (role.group.teams_committees? || role.group.councils?) }
     when :senior_delegate
       senior_delegate?
-    when :wdc
-      wdc_team?
-    when :wec
-      ethics_committee?
+    when :wic
+      wic_team?
     when :weat
       weat_team?
     else

@@ -5,10 +5,28 @@
   <%= render layout: "nav" do %>
     <h1><%= yield(:title) %></h1>
 
+    <% if flash.now[:warning] %>
+      <div class="alert alert-warning">
+        <%= flash.now[:warning] %>
+      </div>
+    <% end %>
+
+    <% if flash.now[:success] %>
+      <div class="alert alert-success">
+        <%= flash.now[:success] %>
+      </div>
+    <% end %>
+
+    <% if flash.now[:danger] %>
+      <div class="alert alert-danger">
+        <%= flash.now[:danger] %>
+      </div>
+    <% end %>
+
     <p>This process will take you through the steps required to anonymize a WCA Profile. This action is IRREVERSIBLE and any future results they earn through official competitions will result in a new WCA ID assignment and will not be linked to any previous official results earned before the removal of their data.</p>
     <p>Before processing any anonymization requests, WRT must receive verification with a picture/copy of an official ID verification (passport, driver's license, etc.) with a minimum of their name and birthday (any other information may be blurred-out/obfuscated).</p>
     <p>After going through the initial steps of requesting data removal from data processors, by clicking confirm:</p>
-    <p>- A new WCA ID will be generated (removing any form of the persons name from the WCAID).</p>
+    <p>- A new WCA ID will be generated (removing any form of the person's name from the WCAID).</p>
     <p>- Personally identifiable information (PII) in the users, Results, and Persons tables will be anonymized.</p>
     <p>- This PII includes: name, DOB, email, avatar, gender, and IP addresses).</p>
 
@@ -20,7 +38,7 @@
         <h4>Request Data Removal from data processors</h4>
         <ol>
           <li>For recently competed competitions (Past 3 months), verify with the delegates that there is nothing outstanding regarding the competitor's involvement in these WCA competitions:</li>
-          <% recent_competitions_3_months = @anonymize_person.person.competitions.select{ |c| c.start_date > (Date.today - 3.month) } %>
+          <% recent_competitions_3_months = @anonymize_person.person.competitions.select { |c| c.start_date > (Date.today - 3.month) } %>
 
           <% if recent_competitions_3_months.any? %>
 
@@ -58,7 +76,7 @@
 
           <br>
           <li>Inspect external websites of competitions for data usage. If so, instruct the website to remove the person's data.</li>
-          <% competitions_with_external = @anonymize_person.person.competitions.select{ |c| c.external_website } %>
+          <% competitions_with_external = @anonymize_person.person.competitions.select { |c| c.external_website } %>
 
           <% if competitions_with_external.any? %>
 
@@ -71,8 +89,8 @@
           <% end %>
 
           <br>
-          <li>For recently competed competitions (Past 1 month), after anonymizing the person's data, synchrozie the results on <%= link_to "WCA Live", "https://live.worldcubeassociation.org" %>:</li>
-          <% recent_competitions_1_month = @anonymize_person.person.competitions.select{ |c| c.start_date > (Date.today - 1.month) } %>
+          <li>For recently competed competitions (Past 1 month), after anonymizing the person's data, synchronize the results on <%= link_to "WCA Live", "https://live.worldcubeassociation.org" %>:</li>
+          <% recent_competitions_1_month = @anonymize_person.person.competitions.select { |c| c.start_date > (Date.today - 1.month) } %>
 
           <% if recent_competitions_1_month.any? %>
 
@@ -91,9 +109,9 @@
       <br>
 
       <div>
-        <%= f.submit "Back", :class => "btn btn-primary", :name => "back_button" unless @anonymize_person.first_step? %>
-        <%= f.submit "Next Step", :class => "btn btn-primary" unless @anonymize_person.last_step? %>
-        <%= f.submit "Confirm", :class => "btn btn-success", data: { confirm: "Are you sure you want to anonymize this person? All personal data will be removed from WCA once confirmed." } if @anonymize_person.last_step? %>
+        <%= f.submit "Back", class: "btn btn-primary", name: "back_button" unless @anonymize_person.first_step? %>
+        <%= f.submit "Next Step", class: "btn btn-primary" unless @anonymize_person.last_step? %>
+        <%= f.submit "Confirm", class: "btn btn-success", data: { confirm: "Are you sure you want to anonymize this person? All personal data will be removed from WCA once confirmed." } if @anonymize_person.last_step? %>
       </div>
     <% end %>
 

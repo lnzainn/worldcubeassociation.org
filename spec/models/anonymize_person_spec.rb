@@ -9,6 +9,11 @@ RSpec.describe AnonymizePerson do
   let(:user) { FactoryBot.create(:user, :wca_id) }
   let(:anonymize_person2) { AnonymizePerson.new(person_wca_id: user.wca_id) }
 
+  before do
+    allow(anonymize_person).to receive(:banned?).and_return(false)
+    allow(anonymize_person2).to receive(:banned?).and_return(false)
+  end
+
   it "is valid" do
     expect(anonymize_person).to be_valid
   end
@@ -53,5 +58,17 @@ RSpec.describe AnonymizePerson do
     expect(user.reload.name).to eq "Anonymous"
     expect(user.reload.dob).to eq nil
     expect(user.reload.gender).to eq "o"
+  end
+
+  context "when the user is banned" do
+    before do
+      allow(anonymize_person).to receive(:banned?).and_return(true)
+    end
+
+    it "does not anonymize and returns a warning" do
+      response = anonymize_person.do_anonymize_person
+      expect(response).to eq({ warning: "User is banned and cannot be anonymized" })
+      expect(person.reload.wca_id).to eq "2020EXAM01" # Ensure data is unchanged
+    end
   end
 end

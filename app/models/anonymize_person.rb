@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def anonymize_person
   session[:anonymize_params] = {}
   session[:anonymize_step] = nil

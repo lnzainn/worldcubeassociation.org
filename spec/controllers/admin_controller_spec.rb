@@ -48,6 +48,11 @@ RSpec.describe AdminController, type: :controller do
     sign_in { FactoryBot.create :admin }
 
     let(:person) { FactoryBot.create(:person_who_has_competed_once) }
+    let(:banned_person) { FactoryBot.create(:person_who_has_competed_once) }
+
+    before do
+      allow_any_instance_of(AnonymizePerson).to receive(:banned?).and_return(false)
+    end
 
     it 'can anonymize person' do
       get :anonymize_person
@@ -59,6 +64,16 @@ RSpec.describe AdminController, type: :controller do
       expect(response.status).to eq 200
       expect(response).to render_template :anonymize_person
       expect(flash.now[:success]).to eq "Successfully anonymized #{person.wca_id} to #{person.wca_id[0..3]}ANON01! Don't forget to run Compute Auxiliary Data and Export Public."
+    end
+
+    it 'does not anonymize banned person and shows warning' do
+      allow_any_instance_of(AnonymizePerson).to receive(:banned?).and_return(true)
+
+      get :anonymize_person
+      post :do_anonymize_person, params: { anonymize_person: { person_wca_id: banned_person.wca_id } }
+      expect(response.status).to eq 200
+      expect(response).to render_template :anonymize_person
+      expect(flash.now[:warning]).to eq "User is banned and cannot be anonymized"
     end
   end
 

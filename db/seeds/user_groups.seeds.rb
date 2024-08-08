@@ -130,7 +130,7 @@ after :groups_metadata_board, :groups_metadata_councils, :groups_metadata_teams_
     name: 'WCA Advisory Council',
     group_type: :councils,
     is_active: true,
-    is_hidden: false,
+    is_hidden: true,
     metadata: GroupsMetadataCouncils.find_by!(friendly_id: 'wac'),
   )
 

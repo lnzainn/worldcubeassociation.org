@@ -66,6 +66,12 @@ RUN rm -rf node_modules
 
 FROM base AS runtime
 
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+      mariadb-client \
+      zip \
+      python-is-python3
+
 # Copy built artifacts: gems, application
 COPY --from=build /rails .
 
@@ -75,10 +81,6 @@ RUN useradd rails --create-home --shell /bin/bash && \
 
 FROM runtime AS sidekiq
 
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y \
-      zip \
-      python-is-python3
 USER rails:rails
 RUN gem install mailcatcher
 

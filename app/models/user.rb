@@ -769,7 +769,9 @@ class User < ApplicationRecord
       },
       wct: {
         name: 'WCT panel',
-        pages: [],
+        pages: [
+          panel_pages[:importantLinks],
+          ],
       },
       weat: {
         name: 'WEAT panel',

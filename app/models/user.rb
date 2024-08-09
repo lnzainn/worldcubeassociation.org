@@ -771,7 +771,7 @@ class User < ApplicationRecord
         name: 'WCT panel',
         pages: [
           panel_pages[:importantLinks],
-          ],
+        ],
       },
       weat: {
         name: 'WEAT panel',

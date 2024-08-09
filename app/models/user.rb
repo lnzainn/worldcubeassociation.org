@@ -767,6 +767,10 @@ class User < ApplicationRecord
           panel_pages[:downloadVoters],
         ],
       },
+      wct: {
+        name: 'WCT panel',
+        pages: [],
+      },
       weat: {
         name: 'WEAT panel',
         pages: [

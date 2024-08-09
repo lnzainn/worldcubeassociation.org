@@ -1366,6 +1366,8 @@ class User < ApplicationRecord
       wdc_team?
     when :wec
       ethics_committee?
+    when :wct
+      communication_team?
     when :weat
       weat_team?
     else

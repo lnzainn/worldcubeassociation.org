@@ -87,6 +87,10 @@ module PanelHelper
           panel_pages[:bannedCompetitors],
         ],
       },
+      wct: {
+        name: 'WCT panel',
+        pages: [],
+      },
     }
   end
 end

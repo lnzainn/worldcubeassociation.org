@@ -676,6 +676,7 @@ class User < ApplicationRecord
       :leaderForms,
       :groupsManager,
       :importantLinks,
+      :wctImportantLinks,
       :delegateHandbook,
       :seniorDelegatesList,
       :leadersAdmin,
@@ -705,6 +706,10 @@ class User < ApplicationRecord
           panel_pages[:delegateHandbook],
           panel_pages[:bannedCompetitors],
         ],
+      },
+      wct: {
+        name: 'WCT panel',
+        pages: [],
       },
       wfc: {
         name: 'WFC panel',

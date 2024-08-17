@@ -26,6 +26,7 @@ import OfficersEditor from './pages/OfficersEditor';
 import RegionsAdmin from './pages/RegionsAdmin';
 import RegionManager from './pages/RegionManager';
 import DownloadVoters from './pages/DownloadVoters';
+import WCTLinks from './pages/WCTLinks';
 
 const DELEGATE_HANDBOOK_LINK = 'https://documents.worldcubeassociation.org/edudoc/delegate-handbook/delegate-handbook.pdf';
 
@@ -101,6 +102,10 @@ export default {
   [PANEL_PAGES.importantLinks]: {
     name: 'Important Links',
     component: ImportantLinks,
+  },
+  [PANEL_PAGES.wctImportantLinks]: {
+    name: 'WCT Links',
+    component: WCTLinks,
   },
   [PANEL_PAGES.delegateHandbook]: {
     name: 'Delegate Handbook',

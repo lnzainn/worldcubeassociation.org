@@ -31,7 +31,7 @@ function ListItemLink({ title, link }) {
 export default function ImportantLinks() {
   return (
     <>
-      <Header as="h2">Important Links</Header>
+      <Header as="h2">WCT Important Links</Header>
       <List>
         {IMPORTANT_LINKS.map(({ title, link }) => (
           <ListItemLink key={link} title={title} link={link} />

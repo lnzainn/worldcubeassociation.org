@@ -121,7 +121,7 @@ module ResultsValidators
 
         without_wca_id, with_wca_id = persons_by_id.values.partition { |p| p.wca_id.empty? }
         if without_wca_id.any?
-          existing_person_in_db_by_name = Person.where(name: without_wca_id.map(&:name)).group_by(&:name)
+          existing_person_in_db_by_name = Person.where("LOWER(name) IN (?)", without_wca_id.map { |p| p.name.downcase }).group_by { |person| person.name.downcase }
           existing_person_in_db_by_name.each do |name, persons|
             @warnings << ValidationWarning.new(SAME_PERSON_NAME_WARNING,
                                                :persons, competition.id,

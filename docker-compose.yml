@@ -137,7 +137,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
     command: --mysql-native-password=ON
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - wca_db_volume:/var/lib/mysql
       - ./docker/my.cnf:/etc/my.cnf

@@ -24,6 +24,10 @@ const QUERY_TYPES = [
     requiredPermission: null,
   },
   {
+    key: 'request_anonymization',
+    requiredPermission: null,
+  },
+  {
     key: 'other_query',
     requiredPermission: null,
   },

@@ -841,6 +841,8 @@ en:
               label: "Edit someone else's profile data"
             report_result_issue:
               label: "Report an issue in a result"
+            request_anonymization:
+              label: "Request anonymization of my profile data"
             other_query:
               label: "Other query"
           message:
